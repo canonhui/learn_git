@@ -4,11 +4,11 @@ git学习
 	git config --list
 	
 - 创建版本库
-	mkdir learngit --在当前目录新建一个空目录
+	mkdir learngit #在当前目录新建一个空目录
 	cd learngit 
-	pwd --显示当前目录
-	git init --把当前目录变成Git可以管理的仓库(repository)
-	ls -ah --如果.git目录默认被隐藏，可用此命令显示
+	pwd #显示当前目录
+	git init #把当前目录变成Git可以管理的仓库(repository)
+	ls -ah #如果.git目录默认被隐藏，可用此命令显示
 	把一个文件添加到Git仓库：
 		git add readme.txt
 		git commit -m "wrote a txt"
@@ -18,19 +18,20 @@ git学习
 		git commit -m "add 2 files"
 	
 - 时光穿梭机
-	git status --查看仓库当前的状态
+	git status #查看仓库当前的状态
 	也可以
 		git status filename
-	git diff --查看最近一次被修改的内容(difference)
+	git diff #查看最近一次被修改的内容(difference)
 	
 - 版本回退
-	git log --从近到远地显示提交commit的日志
+	git log #从近到远地显示提交commit的日志
 		每条日志里一大串数字是commit ID（版本号），这是一个有SHA1计算出来的非常大的数字，用16进制表示
-	git log --pretty=oneline --简化输出信息
+	git log --pretty=oneline #简化输出信息
 	Git中，用HEAD（一个指针）指向当前版本，也就是最新提交的版本，上一个版本是HEAD^，上上个HEAD^^，上一百个可为HEAD~100
-	git reset --hard HEAD^ --回退到上一个版本，且回退之后再用git log发现最新提交的版本日志信息已经没了
-	cat readme.txt --显示文件内容
-	git reset --hard 7bd0 --回退之后再回到未来的某个版本（用版本号指定，最少前4位）
-	git reflog --可以显示每一次提交和回退命令，这样即使回退之后关掉了电脑还是可以回到未来啦啊哈哈!reflog大法好呀呀呀呀
+	git reset --hard HEAD^ #回退到上一个版本，且回退之后再用git log发现最新提交的版本日志信息已经没了
+	cat readme.txt #显示文件内容
+	git reset --hard 7bd0 #回退之后再回到未来的某个版本（用版本号指定，最少前4位）
+	git reflog #可以显示每一次提交和回退命令，这样即使回退之后关掉了电脑还是可以回到未来啦啊哈哈!reflog大法好呀呀呀呀
 	
+- 工作区和暂存区
 	
