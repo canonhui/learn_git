@@ -45,6 +45,24 @@ git学习
    则git会只提交第一次修改，因为git commit只负责把暂存区的修改提交
    
 - 撤销修改
-	git checkout -- readme.txt ---撤销工作区的修改（此修改还未添加到暂存区）
-	git reset HEAD readme.txt ---将该文件的暂存区的修改回退到工作区，然后再用以上命令撤销工作区修改
+	git checkout -- readme.txt #撤销工作区的修改（此修改还未添加到暂存区）
+	git reset HEAD readme.txt #将该文件的暂存区的修改回退到工作区，然后再用以上命令撤销工作区修改
 	
+- 删除文件
+	rm test.txt #删除工作区内的文件，跟Ctrl+Delete效果一样，
+	git rm test.txt #从版本库中删除该文件，连带工作区也删
+	git commit -m "remove test.txt" #然后还得提交本次删除
+		###从版本库中删除一个文件跟普通修改一样，需要先将此修改（删除）添加到暂存区(git rm)，然后再提交。
+   因此在 git rm 之后可以用 git reset HEAD test.txt 从暂存区中撤销，但不知道这个撤销操作有啥用。。。
+	git checkout -- test.txt #可以将工作区中没有而版本库中存在的文件最新版本恢复到工作区中
+		###git checkout其实就是将版本库中的最新版本替换工作区中的版本
+
+- 远程仓库
+	#杀手级功能之一（还有之二，之三。。。）
+	#实际情况往往是这样，找一台电脑充当服务器的角色，每天24小时开机，其他每个人都从这个“服务器”仓库克隆
+   一份到自己的电脑上，并且各自把各自的提交推送到服务器仓库里，也从服务器仓库中拉取别人的提交。
+	
+- 添加远程库
+	git remote add origin https://github.com/canonhui/learn_git.git #关联我的小远程库
+	git push -u origin master #第一次推送分支master的所有内容
+	git push origin master #每次本地提交后使用此命令推送最新修改
