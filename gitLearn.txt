@@ -29,14 +29,22 @@ git学习
 	git log --pretty=oneline #简化输出信息
 	Git中，用HEAD（一个指针）指向当前版本，也就是最新提交的版本，上一个版本是HEAD^，上上个HEAD^^，上一百个可为HEAD~100
 	git reset --hard HEAD^ #回退到上一个版本，且回退之后再用git log发现最新提交的版本日志信息已经没了
-	cat readme.txt #显示文件内容
+	cat readme.txt #显示工作区内已经保存的文件内容
 	git reset --hard 7bd0 #回退之后再回到未来的某个版本（用版本号指定，最少前4位）
 	git reflog #可以显示每一次提交和回退命令，这样即使回退之后关掉了电脑还是可以回到未来啦啊哈哈!reflog大法好呀呀呀呀
 	
 - 工作区和暂存区
 	#工作区(Working Directory)：就是在电脑上能看到的目录，如learn_git文件夹
 	#版本库(Repository)：工作区内的目录".git"。里面存了许多东西，最重要的是stage（或者index）暂存区，
-	还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
+   还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
 	#git add是把工作区内的文件修改添加到暂存区，而git commit则是把暂存区的所有内容提交到当前分支
 	#需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。
+	
+- 管理修改
+	#若执行如下操作：第一次修改->git add -> 第二次修改 -> 提交
+   则git会只提交第一次修改，因为git commit只负责把暂存区的修改提交
+   
+- 撤销修改
+	git checkout -- readme.txt ---撤销工作区的修改（此修改还未添加到暂存区）
+	git reset HEAD readme.txt ---将该文件的暂存区的修改回退到工作区，然后再用以上命令撤销工作区修改
 	
