@@ -94,4 +94,25 @@ git学习
 	#Your branch is ahead of 'origin/master' by 1 commit.---意思是当前分支比远程master分支超前一个提交
 	git log --graph --pretty=oneline --abbrev-commit #查看分支合并图
 	
+- 分支管理策略
+	#合并分支时Git默认用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。
+	#如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，
+   这样，从分支历史上就可以看出分支信息。命令如下：
+	git merge --no-ff -m "merge with no-ff" dev #--no-ff表示禁用Fast forward。合并的同时还提交了
+	#常用分支策略为：
+		#master禁用来发布新版本，平时活不在上面干
+		#活都在dev分支上干，活干到一个阶段的时候就往master上合并
+		#各个小伙伴都从dev上创建一个分支，各自干活，时不时地合并到dev上
 
+-bug分支
+	#在Git中，每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除。
+	#工作到一半不能继续，被迫需要做其他事情时，先把不能提交的工作现场保存(stash)：
+		git stash #暂存区和工作区的为提交文件都可以stash
+	git stash list #查看所有保存的工作现场
+	#回到工作现场有两种方法：
+		git stash pop #恢复所有工作现场并同时删除stash内容
+		git stash apply stash@{1} #恢复指定工作现场，但不删除
+		git stash drop stash@{1} #删除指定工作现场
+	#后一种方法的两条命令若没指定具体的stash，则操作对象为stash@{0}
+	
+	
