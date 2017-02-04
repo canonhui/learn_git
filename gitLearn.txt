@@ -66,3 +66,32 @@ git学习
 	git remote add origin https://github.com/canonhui/learn_git.git #关联我的小远程库
 	git push -u origin master #第一次推送分支master的所有内容
 	git push origin master #每次本地提交后使用此命令推送最新修改
+
+- 从远程库克隆
+	git clone git@github.com:canonhui/git_skills.git #使用SSH协议克隆我的远程小金库哈哈
+		#克隆后的本地仓库地址在当前目录下
+	git clone https://github.com/canonhui/git_skills.git #使用HTTPS协议克隆
+	#使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令（没见输入什么口令啊），
+   但是在某些只开放http端口的公司内部就无法使用ssh协议而只能用https。
+	#从远程库克隆下来的本地仓库就直接和远程库关联了，直接就可以推送
+	
+- 分支管理
+	#暂时还不知道其真正用途
+	
+- 创建与合并分支
+	git branch #查看所有分支以及确认当前分支
+	git branch dev #创建新分支
+	git checkout dev #切换到dev分支
+	git branch -b dev #创建并切换到dev分支
+	git merge dev #合并dev分支到当前分支
+	git branch -d dev #删除dev分支
+	#关于分支的工作原理如果忘了就去看教程吧，这里懒得总结了
+	
+- 解决冲突
+	#所谓冲突(conflict)就是先在一个分支上修改文件，再切换到另一个分支上修改同一个文件，
+   此时若合并这两个分支，则会产生冲突，解决冲突(fix conflict)就是手动修改文件之后再提交，
+   提交之后会把两个分支合并，然后就可以删除新建的分支了。
+	#Your branch is ahead of 'origin/master' by 1 commit.---意思是当前分支比远程master分支超前一个提交
+	git log --graph --pretty=oneline --abbrev-commit #查看分支合并图
+	
+
