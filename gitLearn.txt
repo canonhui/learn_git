@@ -160,4 +160,9 @@ git学习
 	git tag -a <tagname> -m "text" <commit id> #创建带有说明文字的标签，-m参数指定说明文字
 	#git show这条命令好像有挺多功能的，回头得细细研究一下
 		git show #若v1.0为最新commit的标签，则此命令等同于 git show v1.0
+	#可以通过-s参数用私钥签名一个标签，签名采用PGP签名，需首先安装gpg(GnuPG):
+		git tag -s v0.2 -m "signed version 0.2 released" <commit id>
+	#用PGP签了名的标签是不可伪造的
+	
+
 
