@@ -115,4 +115,28 @@ git学习
 		git stash drop stash@{1} #删除指定工作现场
 	#后一种方法的两条命令若没指定具体的stash，则操作对象为stash@{0}
 	
+- Feature分支
+	#没添加一个新功能，最好新建一个feature分支
+	git branch -D feature #强行删除一个没有被合并过的分支
 	
+- 多人协作
+	#远程仓库默认名称是origin
+	git remote #查看远程仓库信息（名称）
+	git remote -v #显示可以抓取(fetch)和推送(push)分支的origin地址
+- 推送分支
+	#需要推送的分支
+		#master：时刻与远程同步
+		#dev：开发分支，同样应与远程同步
+		#bug分支：一般没必要同步，除非老板要看你修复bug的进度
+		#feature：是否同步取决于是否和小伙伴在上面合作开发
+- 抓取分支
+	#从远程库克隆到本地后，默认情况下，即使远程库有多个分支，本地也只能看到master主分支
+	git checkout -b dev origin/dev #将远程的dev分支也克隆到本地
+	#多人协作的工作模式通常是这样：
+		1、首先，可以试图用git push origin branch-name推送自己的修改；
+		2、如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+		3、如果合并有冲突，则解决冲突，并在本地提交；
+		4、没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+	#如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，
+   用命令git branch --set-upstream branch-name origin/branch-name。
+   
