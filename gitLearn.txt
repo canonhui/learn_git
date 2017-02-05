@@ -1,5 +1,8 @@
 git学习
 
+- 经验：
+	命令中所有用到<commit id>的地方都可以用HEAD指针代替
+	
 - 查看配置信息
 	git config --list
 	
@@ -21,7 +24,7 @@ git学习
 	git status #查看仓库当前的状态
 	#也可以
 		git status filename
-	git diff #查看最近一次被修改的内容(difference)
+	git diff #查看最近一次被修改的内容(difference)。红字表示删除内容，绿字表示增加的内容
 	
 - 版本回退
 	git log #从近到远地显示提交commit的日志
@@ -156,4 +159,5 @@ git学习
 	git show <tagname> #查看指定标签信息
 	git tag -a <tagname> -m "text" <commit id> #创建带有说明文字的标签，-m参数指定说明文字
 	#git show这条命令好像有挺多功能的，回头得细细研究一下
-	
+		git show #若v1.0为最新commit的标签，则此命令等同于 git show v1.0
+
