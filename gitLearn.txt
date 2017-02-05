@@ -1,5 +1,8 @@
 git学习
 
+- 经验：
+	命令中所有用到<commit id>的地方都可以用HEAD指针代替
+	
 - 查看配置信息
 	git config --list
 	
@@ -21,7 +24,7 @@ git学习
 	git status #查看仓库当前的状态
 	#也可以
 		git status filename
-	git diff #查看最近一次被修改的内容(difference)
+	git diff #查看最近一次被修改的内容(difference)。红字表示删除内容，绿字表示增加的内容
 	
 - 版本回退
 	git log #从近到远地显示提交commit的日志
@@ -138,5 +141,44 @@ git学习
 		3、如果合并有冲突，则解决冲突，并在本地提交；
 		4、没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
 	#如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，
-   用命令git branch --set-upstream branch-name origin/branch-name。
+   用命令
+		git branch --set-upstream branch-name origin/branch-name
+	或者：
+		git pull origin branch-name
    
+- 标签管理
+	#发布一个版本时，我们通常先在版本库中打一个标签（tag），这样，就唯一确定了打标签时刻的版本。
+   将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。
+	#Git的标签虽然是版本库的快照，但其实它就是指向某个commit的指针（跟分支很像，但是分支可以移动，标签不能移动）
+	#标签的意义就是给某个特殊意义的commit赋予一个有意义的名字，便于日后调用commit
+	
+- 创建标签
+	git tag v1.0 #给当前最新提交打个v1.0标签
+	git tag #查看所有标签
+	git tag <tagname> <commit id> #给指定提交打标签
+	git show <tagname> #查看指定标签信息
+	git tag -a <tagname> -m "text" <commit id> #创建带有说明文字的标签，-m参数指定说明文字，"-a"可以省略
+	#带说明文字的是含附注(annotated)标签，不含的是轻量级(ligntweight)标签
+	#含附注标签，实际上是存储在仓库中的一个独立对象，它有自身的校验和信息，
+   包含着标签的名字，电子邮件地址和日期，以及标签说明，标签本身也允许使用GNU Privacy Guard(GPG)来签署或验证。
+	#git show这条命令好像有挺多功能的，回头得细细研究一下
+		git show #若v1.0为最新commit的标签，则此命令等同于 git show v1.0
+	#可以通过-s参数用私钥签名一个标签，签名采用PGP签名，需首先安装gpg(GnuPG):
+		git tag -s v0.2 -m "signed version 0.2 released" <commit id>
+	#用PGP签了名的标签是不可伪造的
+	
+- 操作标签
+	git tag -d v0.7 #删除标签v0.7
+	git push origin v0.9 #推送标签v0.9到远程仓库
+	git push origin --tags #推送所有尚未推送的标签到远程仓库
+	#如果标签已经推送到远程，再想删除则步骤为：
+		#先从本地删除标签
+		git push origin :refs/tags/v0.9 #再用此命令从远程删除
+		#或者
+		git push origin --delete tag v0.9
+	#如果我先推送了一个v1.0标签，则与我合作的小伙伴不能再推送同名的标签了
+	git ls-remote --tags #查看远程仓库标签
+	git pull origin --tags 或
+	git fetch origin --tags #远程抓取所有标签
+	#暂时不知如何远程抓取指定标签
+	
