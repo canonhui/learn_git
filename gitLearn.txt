@@ -2,6 +2,13 @@ git学习
 
 - 经验：
 	命令中所有用到<commit id>的地方都可以用HEAD指针代替
+
+- 关于SSH加密
+	SSH Key是为了验证这个推送确实是我提交的，就是验证签名的作用吧
+	ssh-keygen -t rsa -C "email@example.com" #创建SSH key，会产生id_rsa和id_rsa.pub文件，分别储存SSH私钥和公钥
+		接下来就只需将公钥内容复制到github中的 Add SSH Key中对应位置了
+	git config --system http.sslcainfo "D:\eduty\Git\mingw64\ssl\certs\ca-bundle.trust.crt" #改变证书路径，这个证书可能是被SSH需要的吧
+	git config --system http.sslverify false #取消SSH验证
 	
 - 查看配置信息
 	git config --list
@@ -182,3 +189,8 @@ git学习
 	git fetch origin --tags #远程抓取所有标签
 	#暂时不知如何远程抓取指定标签
 	
+- 使用github
+	#在GitHub上，可以任意Fork开源仓库；
+	#自己拥有Fork后的仓库的读写权限；
+	#可以推送pull request给官方仓库来贡献代码。
+
